@@ -1,20 +1,28 @@
 ﻿using System.Diagnostics;
+using Application.Database;
 using Microsoft.AspNetCore.Mvc;
 using Application.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly AppDbContext _context;
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(AppDbContext context, ILogger<HomeController> logger)
     {
+        _context = context;
         _logger = logger;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
+        var result = await _context.Table.ToListAsync();
+        
+        _logger.LogError(result.ToString());
+        
         return View();
     }
 
