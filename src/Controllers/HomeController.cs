@@ -19,8 +19,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var result = await _context.Table.ToListAsync();
-        
+        var result = await _context.Candidate.CountAsync();
         _logger.LogError(result.ToString());
         
         return View();
