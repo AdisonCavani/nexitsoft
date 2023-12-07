@@ -1,8 +1,8 @@
-﻿using Application.Database.Converters;
-using Application.Database.Entities;
+﻿using Application.Data.Converters;
+using Application.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Database;
+namespace Application.Data;
 
 public class AppDbContext : DbContext
 {

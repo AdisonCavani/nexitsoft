@@ -1,4 +1,4 @@
-﻿namespace Application.Database.Entities;
+﻿namespace Application.Data.Entities;
 
 public class CandidateEntity
 {

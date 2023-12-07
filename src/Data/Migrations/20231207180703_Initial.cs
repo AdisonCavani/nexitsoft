@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Application.Migrations
+namespace Application.Data.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration
@@ -18,7 +18,7 @@ namespace Application.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    BirthDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Education = table.Column<int>(type: "int", nullable: false),
                     CoverLetter = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
@@ -37,8 +37,8 @@ namespace Application.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CandidateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CompanyName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    From = table.Column<DateOnly>(type: "date", nullable: false),
-                    To = table.Column<DateOnly>(type: "date", nullable: false)
+                    From = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    To = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

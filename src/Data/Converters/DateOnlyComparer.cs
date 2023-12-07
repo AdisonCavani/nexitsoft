@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace Application.Database.Converters;
+namespace Application.Data.Converters;
 
 public class DateOnlyComparer : ValueComparer<DateOnly>
 {
