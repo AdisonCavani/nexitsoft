@@ -1,16 +1,76 @@
 ﻿@page
+@using Application.Data.Entities
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
+<div class="text-center d-flex flex-column align-items-center justify-content-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    
-    <form>
-        <label for="name">Name</label>
-        <input id="name" type="text" placeholder="Name">
-        <button type="submit">Submit</button>
+    <p>Please fill out this form</p>
+
+    <form method="post" enctype="multipart/form-data" class="col-md-4 mt-4 text-start d-flex flex-column gap-3">
+        <div>
+            <label asp-for="Input.FirstName" class="form-label required">First name</label>
+            <input asp-for="Input.FirstName" class="form-control" autocomplete="given-name" aria-required="true" placeholder="John">
+            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Input.LastName" class="form-label required">Last name</label>
+            <input asp-for="Input.LastName" class="form-control" autocomplete="family-name" aria-required="true" placeholder="Doe">
+            <span asp-validation-for="Input.LastName" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Input.BirthDate" class="form-label required">Date of birth</label>
+            <input asp-for="Input.BirthDate" type="date" max="@DateTime.Today.ToString("yyyy-MM-dd")" class="form-control" autocomplete="bday" aria-required="true">
+            <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Input.Email" class="form-label required">Email</label>
+            <input asp-for="Input.Email" type="email" class="form-control" autocomplete="email" aria-required="true" placeholder="john.doe@email.com">
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Input.Education" class="form-label required">Education</label>
+            <select asp-for="Input.Education" class="form-select">
+                @foreach (var educationLevel in Enum.GetValues(typeof(EducationEnum)))
+                {
+                    <option value="@((int) educationLevel)">@educationLevel</option>
+                }
+            </select>
+            <span asp-validation-for="Input.Education" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Input.CoverLetterData" class="form-label required">Cover letter</label>
+            <input asp-for="Input.CoverLetterData" type="file" accept=".jpg,.jpeg,.pdf,.doc" class="form-control" aria-required="true">
+            <span asp-validation-for="Input.CoverLetterData" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Input.CurriculumVitaeData" class="form-label required">Curriculum Vitae</label>
+            <input asp-for="Input.CurriculumVitaeData" type="file" accept=".jpg,.jpeg,.pdf,.doc" class="form-control" aria-required="true">
+            <span asp-validation-for="Input.CurriculumVitaeData" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Input.AdditionalFileData" class="form-label">Additional file (optional)</label>
+            <input asp-for="Input.AdditionalFileData" type="file" accept=".jpg,.jpeg,.pdf,.doc" class="form-control">
+            <span asp-validation-for="Input.AdditionalFileData" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Input.JobExperience" class="form-label">Job Experience (optional)</label>
+            <input asp-for="Input.JobExperience" class="form-control" aria-required="true">
+            <span asp-validation-for="Input.JobExperience" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="w-100 btn btn-lg btn-primary">Submit</button>
     </form>
 </div>

@@ -18,5 +18,12 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  box-sizing: border-box
+}
+
+.required:after {
+  content:"*";
+  color:red;
+  margin-left: 2px;
+  font-weight: 700;
 }
