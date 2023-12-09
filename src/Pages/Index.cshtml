@@ -11,7 +11,7 @@
     <h1 class="display-4">Welcome</h1>
     <p>Please fill out this form</p>
 
-    <form method="post" enctype="multipart/form-data" class="col-md-2 mt-4 text-start d-flex flex-column gap-3">
+    <form method="post" enctype="multipart/form-data" class="col-md-5 mt-4 text-start d-flex flex-column gap-3">
         <div class="row">
             <div class="col">
                 <label asp-for="Input.FirstName" class="form-label required">First name</label>
@@ -81,75 +81,69 @@
 let counter = 0
 
 function onClick(element) {
-    const parent = document.createElement("div")
-    parent.setAttribute("class", "border-top py-3 d-flex flex-column gap-3")
+    const parent = $("<div>").addClass("border-top py-3 d-flex flex-column gap-3");
     
-    const button = document.createElement("button");
-    button.setAttribute("type", "button")
-    button.setAttribute("class", "btn btn-danger btn-sm mb-1")
-    button.textContent = "🗑️"
+    const button = $("<button>")
+      .attr({
+        type: "button",
+        class: "btn btn-danger btn-sm mb-1",
+      })
+      .text("🗑️")
+      .on("click", function () {
+        $(this).closest(".border-top").remove();
+      });
     
-    button.addEventListener("click", (element) => 
-        element.target.parentNode.parentNode.parentNode.remove()
-    )
+    const id = `exp_company_name${counter}`;
+    const div = $("<div>");
+    const divWrapper = $("<div>").addClass("d-flex justify-content-between");
+    const label = $("<label>")
+      .addClass("form-label required")
+      .text("Company name")
+      .attr({
+        for: id,
+      });
+    const input = $("<input>").addClass("form-control").attr({
+      required: true,
+      placeholder: "Microsoft",
+      name: id,
+      id: id,
+    });
     
-    const id = `exp_company_name${counter}`
-    const div = document.createElement("div");
-    const div_wrapper = document.createElement("div");
-    div_wrapper.setAttribute("class", "d-flex justify-content-between")
-    const label = document.createElement("label")
-    label.setAttribute("class", "form-label required")
-    label.textContent = "Company name"
-    label.setAttribute("for", id)
+    const id2 = `exp_from${counter}`;
+    const div2 = $("<div>");
+    const label2 = $("<label>").addClass("form-label required").text("From").attr({
+      for: id2,
+    });
+    const input2 = $("<input>").addClass("form-control").attr({
+      required: true,
+      type: "date",
+      name: id2,
+      id: id2,
+    });
     
-    const input = document.createElement("input")
-    input.setAttribute("class", "form-control")
-    input.setAttribute("required", "true")
-    input.setAttribute("placeholder", "Microsoft")
-    input.setAttribute("name", id)
-    input.setAttribute("id", id)
+    const id3 = `exp_to${counter}`;
+    const div3 = $("<div>");
+    const label3 = $("<label>").addClass("form-label required").text("To").attr({
+      for: id3,
+    });
+    const input3 = $("<input>").addClass("form-control").attr({
+      required: true,
+      type: "date",
+      name: id3,
+      id: id3,
+    });
     
-    const id2 = `exp_from${counter}`
-    const div2 = document.createElement("div");
-    const label2 = document.createElement("label")
-    label2.setAttribute("class", "form-label required")
-    label2.textContent = "From"
-    label2.setAttribute("for", id2)
-        
-    const input2 = document.createElement("input")
-    input2.setAttribute("class", "form-control")
-    input2.setAttribute("required", "true")
-    input2.setAttribute("type", "date")
-    input2.setAttribute("id", id2)
-
-    const id3 = `exp_to${counter}`
-    const div3 = document.createElement("div");
-    const label3 = document.createElement("label")
-    label3.setAttribute("class", "form-label required")
-    label3.textContent = "To"
-    label3.setAttribute("for", id3)
-        
-    const input3 = document.createElement("input")
-    input3.setAttribute("class", "form-control")
-    input3.setAttribute("required", "true")
-    input3.setAttribute("type", "date")
-    input3.setAttribute("name", id3)
-    input3.setAttribute("id", id3)
+    $(element).after(parent);
+    parent.append(div);
+    div.append(divWrapper);
+    divWrapper.append(label, button);
+    div.append(input);
+    parent.append(div2);
+    div2.append(label2, input2);
+    parent.append(div3);
+    div3.append(label3, input3);
     
-    element.insertAdjacentElement("afterend", parent)
-    parent.appendChild(div)
-    div.appendChild(div_wrapper)
-    div_wrapper.appendChild(label)
-    div_wrapper.appendChild(button)
-    div.appendChild(input)
-    parent.appendChild(div2)
-    div2.appendChild(label2)
-    div2.appendChild(input2)
-    parent.appendChild(div3)
-    div3.appendChild(label3)
-    div3.appendChild(input3)
-    
-    counter++
+    counter++;
 }
 
 </script>
