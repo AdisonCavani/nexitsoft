@@ -11,66 +11,145 @@
     <h1 class="display-4">Welcome</h1>
     <p>Please fill out this form</p>
 
-    <form method="post" enctype="multipart/form-data" class="col-md-4 mt-4 text-start d-flex flex-column gap-3">
-        <div>
-            <label asp-for="Input.FirstName" class="form-label required">First name</label>
-            <input asp-for="Input.FirstName" class="form-control" autocomplete="given-name" aria-required="true" placeholder="John">
-            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
-        </div>
+    <form method="post" enctype="multipart/form-data" class="col-md-2 mt-4 text-start d-flex flex-column gap-3">
+        <div class="row">
+            <div class="col">
+                <label asp-for="Input.FirstName" class="form-label required">First name</label>
+                <input asp-for="Input.FirstName" class="form-control" autocomplete="given-name" required placeholder="John">
+                <span asp-validation-for="Input.FirstName" class="form-text text-danger"></span>
+            </div>
 
-        <div>
-            <label asp-for="Input.LastName" class="form-label required">Last name</label>
-            <input asp-for="Input.LastName" class="form-control" autocomplete="family-name" aria-required="true" placeholder="Doe">
-            <span asp-validation-for="Input.LastName" class="text-danger"></span>
-        </div>
-
-        <div>
-            <label asp-for="Input.BirthDate" class="form-label required">Date of birth</label>
-            <input asp-for="Input.BirthDate" type="date" max="@DateTime.Today.ToString("yyyy-MM-dd")" class="form-control" autocomplete="bday" aria-required="true">
-            <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
+            <div class="col">
+                <label asp-for="Input.LastName" class="form-label required">Last name</label>
+                <input asp-for="Input.LastName" class="form-control" autocomplete="family-name" required placeholder="Doe">
+                <span asp-validation-for="Input.LastName" class="form-text text-danger"></span>
+            </div>
         </div>
 
         <div>
             <label asp-for="Input.Email" class="form-label required">Email</label>
-            <input asp-for="Input.Email" type="email" class="form-control" autocomplete="email" aria-required="true" placeholder="john.doe@email.com">
-            <span asp-validation-for="Input.Email" class="text-danger"></span>
+            <input asp-for="Input.Email" type="email" class="form-control" autocomplete="email" required placeholder="john.doe@email.com">
+            <span asp-validation-for="Input.Email" class="form-text text-danger"></span>
         </div>
 
-        <div>
-            <label asp-for="Input.Education" class="form-label required">Education</label>
-            <select asp-for="Input.Education" class="form-select">
-                @foreach (var educationLevel in Enum.GetValues(typeof(EducationEnum)))
-                {
-                    <option value="@((int) educationLevel)">@educationLevel</option>
-                }
-            </select>
-            <span asp-validation-for="Input.Education" class="text-danger"></span>
+        <div class="row">
+            <div class="col">
+                <label asp-for="Input.BirthDate" class="form-label required">Date of birth</label>
+                <input asp-for="Input.BirthDate" type="date" max="@DateTime.Today.ToString("yyyy-MM-dd")" class="form-control" autocomplete="bday" required>
+                <span asp-validation-for="Input.BirthDate" class="form-text text-danger"></span>
+            </div>
+
+            <div class="col">
+                <label asp-for="Input.Education" class="form-label required">Education</label>
+                <select asp-for="Input.Education" class="form-select">
+                    @foreach (var educationLevel in Enum.GetValues(typeof(EducationEnum)))
+                    {
+                        <option value="@((int) educationLevel)">@educationLevel</option>
+                    }
+                </select>
+                <span asp-validation-for="Input.Education" class="form-text text-danger"></span>
+            </div>
         </div>
 
         <div>
             <label asp-for="Input.CoverLetterData" class="form-label required">Cover letter</label>
-            <input asp-for="Input.CoverLetterData" type="file" accept=".jpg,.jpeg,.pdf,.doc" class="form-control" aria-required="true">
-            <span asp-validation-for="Input.CoverLetterData" class="text-danger"></span>
+            <input asp-for="Input.CoverLetterData" type="file" accept=".jpg,.jpeg,.pdf,.doc" class="form-control" required>
+            <span class="form-text">Allowed formats: jpg, pdf, doc.</span><br>
+            <span asp-validation-for="Input.CoverLetterData" class="form-text text-danger"></span>
         </div>
 
         <div>
             <label asp-for="Input.CurriculumVitaeData" class="form-label required">Curriculum Vitae</label>
-            <input asp-for="Input.CurriculumVitaeData" type="file" accept=".jpg,.jpeg,.pdf,.doc" class="form-control" aria-required="true">
-            <span asp-validation-for="Input.CurriculumVitaeData" class="text-danger"></span>
+            <input asp-for="Input.CurriculumVitaeData" type="file" accept=".jpg,.jpeg,.pdf,.doc" class="form-control" required>
+            <span class="form-text">Allowed formats: jpg, pdf, doc.</span><br>
+            <span asp-validation-for="Input.CurriculumVitaeData" class="form-text text-danger"></span>
         </div>
 
         <div>
             <label asp-for="Input.AdditionalFileData" class="form-label">Additional file (optional)</label>
-            <input asp-for="Input.AdditionalFileData" type="file" accept=".jpg,.jpeg,.pdf,.doc" class="form-control">
-            <span asp-validation-for="Input.AdditionalFileData" class="text-danger"></span>
+            <input asp-for="Input.AdditionalFileData" max="" type="file" class="form-control">
+            <span asp-validation-for="Input.AdditionalFileData" class="form-text text-danger"></span>
         </div>
 
-        <div>
-            <label asp-for="Input.JobExperience" class="form-label">Job Experience (optional)</label>
-            <input asp-for="Input.JobExperience" class="form-control" aria-required="true">
-            <span asp-validation-for="Input.JobExperience" class="text-danger"></span>
-        </div>
+        <button type="button" onclick="onClick(this)" class="w-100 btn btn-outline-dark">Add job experience</button>
 
-        <button type="submit" class="w-100 btn btn-lg btn-primary">Submit</button>
+        <button type="submit" class="w-100 btn btn-primary">Submit</button>
     </form>
 </div>
+
+<script type="text/javascript">
+let counter = 0
+
+function onClick(element) {
+    const parent = document.createElement("div")
+    parent.setAttribute("class", "border-top py-3 d-flex flex-column gap-3")
+    
+    const button = document.createElement("button");
+    button.setAttribute("type", "button")
+    button.setAttribute("class", "btn btn-danger btn-sm mb-1")
+    button.textContent = "🗑️"
+    
+    button.addEventListener("click", (element) => 
+        element.target.parentNode.parentNode.parentNode.remove()
+    )
+    
+    const id = `exp_company_name${counter}`
+    const div = document.createElement("div");
+    const div_wrapper = document.createElement("div");
+    div_wrapper.setAttribute("class", "d-flex justify-content-between")
+    const label = document.createElement("label")
+    label.setAttribute("class", "form-label required")
+    label.textContent = "Company name"
+    label.setAttribute("for", id)
+    
+    const input = document.createElement("input")
+    input.setAttribute("class", "form-control")
+    input.setAttribute("required", "true")
+    input.setAttribute("placeholder", "Microsoft")
+    input.setAttribute("name", id)
+    input.setAttribute("id", id)
+    
+    const id2 = `exp_from${counter}`
+    const div2 = document.createElement("div");
+    const label2 = document.createElement("label")
+    label2.setAttribute("class", "form-label required")
+    label2.textContent = "From"
+    label2.setAttribute("for", id2)
+        
+    const input2 = document.createElement("input")
+    input2.setAttribute("class", "form-control")
+    input2.setAttribute("required", "true")
+    input2.setAttribute("type", "date")
+    input2.setAttribute("id", id2)
+
+    const id3 = `exp_to${counter}`
+    const div3 = document.createElement("div");
+    const label3 = document.createElement("label")
+    label3.setAttribute("class", "form-label required")
+    label3.textContent = "To"
+    label3.setAttribute("for", id3)
+        
+    const input3 = document.createElement("input")
+    input3.setAttribute("class", "form-control")
+    input3.setAttribute("required", "true")
+    input3.setAttribute("type", "date")
+    input3.setAttribute("name", id3)
+    input3.setAttribute("id", id3)
+    
+    element.insertAdjacentElement("afterend", parent)
+    parent.appendChild(div)
+    div.appendChild(div_wrapper)
+    div_wrapper.appendChild(label)
+    div_wrapper.appendChild(button)
+    div.appendChild(input)
+    parent.appendChild(div2)
+    div2.appendChild(label2)
+    div2.appendChild(input2)
+    parent.appendChild(div3)
+    div3.appendChild(label3)
+    div3.appendChild(input3)
+    
+    counter++
+}
+
+</script>
