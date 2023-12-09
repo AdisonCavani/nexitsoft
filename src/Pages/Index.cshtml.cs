@@ -26,11 +26,10 @@ public class IndexModel : PageModel
         ModelState.Remove($"{nameof(Input)}.{nameof(Input.CurriculumVitae)}");
 
         ValidateModelState();
+        AddDynamicFormData();
         
         if (!ModelState.IsValid)
             return Page();
-        
-        AddDynamicFormData();
 
         Input.CoverLetter = await ReadBytesFromFormFile(Input.CoverLetterData!);
         Input.CurriculumVitae = await ReadBytesFromFormFile(Input.CurriculumVitaeData!);
@@ -72,15 +71,27 @@ public class IndexModel : PageModel
         {
             // Matches the last set of digits in the string
             var index = int.Parse(Regex.Match(array[i].Key, @"\d+$").Value);
-            var company = Request.Form.Single(x => x.Key == "exp_company_name" + index).Value;
-            var from = Request.Form.Single(x => x.Key == "exp_from" + index).Value;
-            var to = Request.Form.Single(x => x.Key == "exp_to" + index).Value;
+            var company = Request.Form.SingleOrDefault(x => x.Key == "exp_company_name" + index).Value;
+            var fromStr = Request.Form.SingleOrDefault(x => x.Key == "exp_from" + index).Value;
+            var toStr = Request.Form.SingleOrDefault(x => x.Key == "exp_to" + index).Value;
 
+            if (string.IsNullOrWhiteSpace(company))
+            {
+                ModelState.AddModelError($"{nameof(Input)}.{nameof(Input.JobExperience)}", "The 'Company name' field was invalid");
+                return;
+            }
+            
+            if (!DateOnly.TryParse(fromStr, out var from) || !DateOnly.TryParse(toStr, out var to))
+            {
+                ModelState.AddModelError($"{nameof(Input)}.{nameof(Input.JobExperience)}", "The 'from' or 'to' field was invalid");
+                return;
+            }
+            
             var previousJob = new PreviousJobEntity
             {
-                CompanyName = company!,
-                From = DateOnly.Parse(from!),
-                To = DateOnly.Parse(to!)
+                CompanyName = company.ToString(),
+                From = from,
+                To = to
             };
 
             Input.JobExperience.Add(previousJob);
