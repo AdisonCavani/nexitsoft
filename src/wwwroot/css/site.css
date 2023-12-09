@@ -23,7 +23,11 @@ body {
 
 .required:after {
   content:"*";
-  color:red;
+  color: var(--bs-red);
   margin-left: 2px;
   font-weight: 700;
+}
+
+.input-validation-error {
+  border-color: var(--bs-red);
 }
