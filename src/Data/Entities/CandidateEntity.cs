@@ -9,11 +9,11 @@ public class CandidateEntity
 
     [Required]
     [Display(Name = "'First name'")]
-    public string FirstName { get; set; } = default!;
+    public required string FirstName { get; set; }
     
     [Required]
     [Display(Name = "'Last name'")]
-    public string LastName { get; set; } = default!;
+    public required string LastName { get; set; } 
     
     [Required]
     [Display(Name = "'Birth date'")]
@@ -22,32 +22,32 @@ public class CandidateEntity
     [Required]
     [EmailAddress]
     [Display(Name = "'Email'")]
-    public string Email { get; set; } = default!;
+    public required string Email { get; set; }
     
     [Required]
     [Display(Name = "'Education'")]
     public EducationEnum Education { get; set; }
 
-    public byte[] CoverLetter { get; set; } = default!;
+    public required byte[] CoverLetter { get; set; }
 
     [Required]
     [NotMapped]
     [Display(Name = "'Cover letter'")]
-    public IFormFile CoverLetterData { get; set; } = default!;
+    public required IFormFile CoverLetterData { get; set; }
 
-    public byte[] CurriculumVitae { get; set; } = default!;
+    public required byte[] CurriculumVitae { get; set; }
     
     [Required]
     [NotMapped]
     [Display(Name = "'Curriculum vitae'")]
-    public IFormFile CurriculumVitaeData { get; set; } = default!;
+    public required IFormFile CurriculumVitaeData { get; set; }
     
     public byte[]? AdditionalFile { get; set; }
     
     [NotMapped]
     public IFormFile? AdditionalFileData { get; set; }
 
-    public ICollection<PreviousJobEntity> JobExperience { get; } = Array.Empty<PreviousJobEntity>();
+    public List<PreviousJobEntity> JobExperience { get; } = new();
 }
 
 public enum EducationEnum

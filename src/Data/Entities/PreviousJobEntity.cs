@@ -6,7 +6,7 @@ public class PreviousJobEntity
     
     public Guid CandidateId { get; set; }
 
-    public string CompanyName { get; set; } = default!;
+    public required string CompanyName { get; set; }
     
     public DateOnly From { get; set; }
     

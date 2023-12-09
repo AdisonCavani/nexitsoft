@@ -11,7 +11,7 @@ public class IndexModel : PageModel
     private readonly ILogger<IndexModel> _logger;
 
     [BindProperty]
-    public CandidateEntity Input { get; set; } = default!;
+    public required CandidateEntity Input { get; set; }
 
     public IndexModel(AppDbContext context, ILogger<IndexModel> logger)
     {

@@ -6,8 +6,8 @@ namespace Application.Data;
 
 public class AppDbContext : DbContext
 {
-    public DbSet<CandidateEntity> Candidate { get; set; } = default!;
-    public DbSet<PreviousJobEntity> PreviousJob { get; set; } = default!;
+    public required DbSet<CandidateEntity> Candidate { get; set; }
+    public required DbSet<PreviousJobEntity> PreviousJob { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
