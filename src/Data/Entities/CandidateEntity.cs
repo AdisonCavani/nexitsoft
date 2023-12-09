@@ -33,14 +33,14 @@ public class CandidateEntity
     [Required]
     [NotMapped]
     [Display(Name = "'Cover letter'")]
-    public required IFormFile CoverLetterData { get; set; }
+    public IFormFile? CoverLetterData { get; set; }
 
     public required byte[] CurriculumVitae { get; set; }
     
     [Required]
     [NotMapped]
     [Display(Name = "'Curriculum vitae'")]
-    public required IFormFile CurriculumVitaeData { get; set; }
+    public IFormFile? CurriculumVitaeData { get; set; }
     
     public byte[]? AdditionalFile { get; set; }
     

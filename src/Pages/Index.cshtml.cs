@@ -32,8 +32,8 @@ public class IndexModel : PageModel
         
         AddDynamicFormData();
 
-        Input.CoverLetter = await ReadBytesFromFormFile(Input.CoverLetterData);
-        Input.CurriculumVitae = await ReadBytesFromFormFile(Input.CurriculumVitaeData);
+        Input.CoverLetter = await ReadBytesFromFormFile(Input.CoverLetterData!);
+        Input.CurriculumVitae = await ReadBytesFromFormFile(Input.CurriculumVitaeData!);
 
         if (Input.AdditionalFileData is not null)
             Input.AdditionalFile = await ReadBytesFromFormFile(Input.AdditionalFileData);
